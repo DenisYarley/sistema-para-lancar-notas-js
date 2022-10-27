@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/styles.css" rel="stylesheet">
+    <title>Calculo de Média JS</title>
+</head>
+
+<body>
+    <div id="container">
+        <h1>SISTEMA DE NOTAS</h1>
+        <input id="nome" type="text" placeholder="Aluno(a)">
+        <input id="notaA" type="number" placeholder="Nota M" value="0" onclick="clicou(this)">
+        <input id="notaB" type="number" placeholder="Nota B" value="0" onclick="clicou(this)">
+        <input id="resultado" type="button" value="Calcular" onclick="verificar()">
+        <input id="limpar" type="button" value="Limpar" onclick="limpar()">
+        <p id="tituloresultado"></p>
+    </div>
+
+    <h1 id="titulo">Histórico</h1>
+
+    <ul id="historico">
+
+    </ul>
+
+    <script>
+
+        var aluno = document.getElementById("nome")
+        var notaA = document.getElementById("notaA")
+        var notaB = document.getElementById("notaB")
+        var resultado = document.getElementById("resultado")
+        var frase = document.getElementById("tituloresultado")
+        var titulohis = document.getElementById("titulo")
+        var lista = document.getElementById("historico")
+
+        function verificar(){
+            if(notaA.value && notaB.value){media()}
+        }
+
+        function media() {
+            soma = parseInt(notaA.value) + parseInt(notaB.value)
+            calculo = soma / 2
+
+
+
+
+            if (calculo > 10 || calculo < 0) { frase.innerText = "Erro 404..." }
+            else { frase.innerText = "Resultado: " + aluno.value + " / Média: " + calculo 
+            titulohis.style.display = "block"
+            lista.innerHTML += '<li class="' + aprovado() + '"> Aluno: ' + aluno.value + ' / Nota Mensal: ' + notaA.value + ' / Nota Bimestral: ' + notaB.value + ' / Média: ' + calculo + ' / Situação: ' + passou() + '</li>'}
+
+            function aprovado() { if (calculo >= 6) { return "aprovado" } else { return "reprovado" } }
+
+            function passou() {
+                if (calculo >= 6) { return "Aprovado" } else { return "Reprovado" }
+            }
+        }
+
+        function limpar() {
+            frase.innerText = " "
+            notaA.value = null
+            notaB.value = null
+
+            titulohis.style.display = "none"
+            lista.innerHTML = null
+        }
+
+        function clicou(a) {
+            a.value = null
+        }
+
+
+    </script>
+</body>
+
+</html>
